@@ -73,7 +73,6 @@ bool resuelveCaso() {
 		return false;
 
 	DigrafoValorado<int> mapaZona(casas);
-	DigrafoValorado<int> mapaZonaInverso(casas);
 
 	int inicio, fin, coste;
 
@@ -82,7 +81,6 @@ bool resuelveCaso() {
 		std::cin >> inicio >> fin >> coste;
 
 		mapaZona.ponArista(AristaDirigida<int>(inicio - 1, fin - 1, coste));
-		mapaZonaInverso.ponArista(AristaDirigida<int>(fin - 1, inicio - 1, coste));
 	}
 
 	int sedeMensajeria = 0;
@@ -92,7 +90,7 @@ bool resuelveCaso() {
 	cin >> sedeMensajeria >> nDestinos;
 
 	Dijkstra resIda(mapaZona, sedeMensajeria - 1);	//Calculamos los caminos minimos desde la oficina de correos
-	Dijkstra resVuelta(mapaZonaInverso, sedeMensajeria - 1);	//Calculamos las distancias minimas desde la oficina a la casa con el grafo inverso
+	Dijkstra resVuelta(mapaZona.inverso(), sedeMensajeria - 1);	//Calculamos las distancias minimas desde la oficina a la casa con el grafo inverso
 
 	bool destinosAlcanzables = true;
 
